@@ -1,0 +1,36 @@
+{% if module.display %}
+<article class="module module--secondary">
+	<h2>{{ module.header }}</h2>
+	<div class="module__content">
+		<div class="package featured">
+			<div class="package__image">
+				<a class="flyout popup--ajax" href="/package/{{ module.package.id }}">
+					<img class="text-center" src="{{ module.package.image.url }}" style="width:190px; height:165px;"><span class="flyout__content">Click for more details.</span>
+				</a>
+			</div>
+
+			<div class="grid">
+				<div class="grid__item one-half">
+					<span class="package__name">{{ module.package.name[:20] }}</span>
+
+
+					{% if module.package.customPrice == false and module.package.price > 0 %}
+					{% if module.package.discount.applied %}
+					<span class="price price--discount">{{ module.package.discount.original|money }}</span>
+					{% endif %}
+					<span class="price">{{ module.package.price|money }} {{ store.currency }}</span>
+					{% endif %}
+				</div>
+				<div class="grid__item one-half text-right">
+					
+					{% if module.package.basket %}
+					<a href="/checkout/packages/remove/{{ module.package.id }}" class="button button--small button--decline"><i class="fa fa-times"></i> {{ lang("button.remove") }}</a>
+					{% else %}
+					<a href="/package/{{ module.package.id }}" class="popup--ajax button button--small button--accept"><i class="fa fa-shopping-cart"></i> {{ lang("button.buy") }}</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+</article>
+{% endif %}

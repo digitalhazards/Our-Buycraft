@@ -1,0 +1,39 @@
+<article class="module module--secondary">
+	<h2>{{ module.header }}</h2>
+	<div class="module__content">
+		{% if module.payments %}
+		<ul class="list">
+			{% for payment in module.payments %}
+			<li>
+				<div class="media media--gutter no-margin">
+					<div class="media__image">
+						<img src="//minotar.net/avatar/{{ payment.ign }}/48" alt="Avatar">
+					</div>
+					<div class="media__body">
+						<strong>{{ payment.ign }}</strong>
+						<div class="extra h6">
+							{% if module.displayPackage %}
+							{{ payment.name[:20] }}
+							{% endif %}
+							{% if module.displayPackage and module.displayPrice %}
+							&bull;
+							{% endif %}
+							{% if module.displayPrice %}
+							{{ payment.price|money }} {{ payment.currency }}
+							{% endif %}
+						</div>
+						<div class="time h6">
+							{% if module.displayTime %}
+							{{ payment.time }}
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</li>
+			{% endfor %}
+		</ul>
+		{% else %}
+		<p>{{ lang("module.payments.empty") }}</p>
+		{% endif %}
+	</div>
+</article>

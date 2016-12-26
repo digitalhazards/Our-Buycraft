@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="grid">
+	<div class="grid__item desk--two-thirds">
+		<main class="page-main">
+			<article class="module">
+				<h2>{{ lang("title.username") }}</h2>
+				<div class="content">
+					<form method="post">
+						<div class="username-container">
+							<input type="text" name="ign" class="input--inline" style="width:400px">
+							<input type="submit" value="{{ lang("button.continue") }}" class="button">
+						</div>
+					</form>
+				</div>
+			</article>
+		</main>
+	</div>
+	<div class="grid__item desk--one-third">
+		<aside class="page-side">
+			{{ modules|raw }}
+		</aside>
+	</div>
+</div>
+{% endblock %}

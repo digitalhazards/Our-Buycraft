@@ -1,0 +1,17 @@
+<article class="module module--secondary">
+	<h2>{{ module.header }}</h2>
+	<div class="module__content">
+		<div class="progress {% if module.bar.style == "striped" %} progress--striped {% endif %} {% if module.bar.animated %} progress--active {% endif %}">
+			<div class="progress__bar" style="width:{{ module.percentage }}%;"></div>
+			<span class="progress__label">
+				{% if module.displayAmount %}
+				{{ module.total }} / {{ module.target }} {{ store.currency }} ({{ module.percentage }}%)
+				{% endif %}
+
+				{% if module.displayAmount == false %}
+				{{ module.percentage }}% completed
+				{% endif %} 
+			</span>
+		</div>
+	</div>  
+</article>

@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="grid">
+	<div class="grid__item desk--two-thirds">
+		<main class="page-main">
+			{% if category.description != "" %}
+			<article class="module">
+				<h1>{{ category.name }}</h1>
+				<div class="module__content">
+					{{ category.description|raw }}
+				</div>
+			</article>
+			{% endif %}
+			<div class="module">
+				{% if category.description == "" %}
+				<h2>{{ category.name }}</h2>
+				{% endif %}
+				<div class="module__content">
+					<p>
+						{% if category.packages|length > 0 %}
+						{% if category.displayType == "list" %}
+						<table class="table table--hover table--striped table--middle">
+							<tbody>
+								{% for package in category.packages %}
+								<tr>
+									<td style="width:45%;"><strong>{{ package.name }}</strong></td>
+									<td style="width:30%; text-align:center;">
+										{% if package.customPrice == false and package.price > 0 %}
+										{% if package.discount.applied %}
+										<span class="price-discount">{{ package.discount.original|money }}</span>
+										{% endif %}
+										{{ package.price|money }} {{ basket.currency }}
+										{% endif %}
+									</td>
+									<td style="width:25%; text-align:right;">
+
+										{% if package.basket %}
+										<a href="/checkout/packages/remove/{{ package.id }}" role="button" class="button button--small button--decline"><i class="fa fa-times"></i> {{ lang("button.remove") }}</a>
+										{% else %}
+										<a href="/package/{{ package.id }}" role="button" class="button button--small button--accept popup--ajax"><i class="fa fa-shopping-cart"></i> {{ lang("button.buy") }}</a>
+										{% endif %}
+
+									</td>
+								</th>
+								{% endfor %}
+							</tbody>
+						</table>
+						{% else %}
+						<div class="grid">
+							{% for package in category.packages %}
+							<div class="grid__item desk--one-half">
+								<div class="package featured">
+									<div class="package__image">
+										<a class="flyout popup--ajax" href="/package/{{ package.id }}">
+											<img class="text-center" src="{{ package.image.url }}" style="width:190px; height:165px;"><span class="flyout__content">Click for more details.</span>
+										</a>
+									</div>
+
+									<div class="grid grid--full">
+										<div class="grid__item one-half">
+											<span class="package__name">{{ package.name[:20] }}</span>
+
+
+											{% if package.customPrice == false and package.price > 0 %}
+											{% if module.package.discount.applied %}
+											<span class="price price--discount">{{ package.discount.original|money }}</span>
+											{% endif %}
+											<span class="price">{{ package.price|money }} {{ store.currency }}</span>
+											{% endif %}
+										</div>
+										<div class="grid__item one-half text-right">
+
+											{% if package.basket %}
+											<a href="/checkout/packages/remove/{{ package.id }}" class="button button--small button--decline popup"><i class="fa fa-times"></i> {{ lang("button.remove") }}</a>
+											{% else %}
+											<a href="/package/{{ package.id }}" class="popup--ajax button button--small button--accept"><i class="fa fa-shopping-cart"></i> {{ lang("button.buy") }}</a>
+											{% endif %}
+										</div>
+									</div>
+								</div>
+							</div>
+							{% endfor %}
+						</div>
+						{% endif %}
+						{% else %}
+						{{ lang("category.empty") }}
+						{% endif %}
+					</p>
+				</div>
+
+			</div></main>
+		</div>
+		<div class="grid__item desk--one-third">
+			<aside class="page-side">
+				{{ modules|raw }}
+			</aside>
+		</div>
+	</div>
+	{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="grid">
+	<div class="grid__item desk--two-thirds">
+		<main class="page-main">
+			<article class="module">
+				<h1 class="module__heading h2">{{ lang("title.payment.complete") }}</h1>
+				<div class="module__content">
+					<p>
+						{{ lang("complete.header") }}
+					</p>
+					<p>
+						{{ lang("complete.instructions") }}
+					</p>
+					<p>
+						{{ lang("complete.help") }}
+					</p>
+				</div>
+			</article>
+		</main>
+	</div>
+	<div class="grid__item desk--one-third">
+		<aside class="page-side">
+			{{ modules|raw }}
+		</aside>
+	</div>
+</div>
+{% endblock %}

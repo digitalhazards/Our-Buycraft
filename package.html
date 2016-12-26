@@ -1,0 +1,35 @@
+<h3 class="module__heading h2">{{ package.name }}</h3>
+<div class="module__content">
+	<div class="grid">
+		<div class="grid__item desk--one-quarter">
+			<img class="package__image--detail" alt="" src="{{ package.image.url }}">
+		</div>
+		<div class="package__desc grid__item desk--one-half">
+			{{ package.description|raw }}
+		</div>
+		<div class="grid__item desk--one-quarter text-right">
+			{% if package.purchasable == false %}
+			<p class="price h4">{{ lang("package.disabled") }}</p>
+			{% elseif package.customPrice %}
+			<p class="price h4">{{ lang("package.customPrice") }}</p>
+			{% elseif package.price == 0.00 %}
+			<p class="price h4">{{ lang("package.free") }}</p>
+			{% else %}
+			<p class="price h3">{{ package.price|money }} {{ basket.currency }}</p>
+			{% endif %}
+
+			{% if package.purchasable %}
+			{% if package.basket %}
+			<a href="/checkout/packages/remove/{{ package.id }}" class="button button--decline"><i class="fa fa-times"></i> {{ lang("button.remove") }}</a>
+			{% else %}
+			{% if package.type != "single" %}
+			<a href="/checkout/packages/add/{{ package.id }}/subscription" class="button button--accept"><i class="fa fa-shopping-cart"></i> {{ lang("button.subscribe") }}</a>
+			{% endif %}
+			{% if package.type != "subscription" %}
+			<a href="/checkout/packages/add/{{ package.id }}/single" class="button button--accept"><i class="fa fa-shopping-cart"></i> {{ lang("button.add") }}</a>
+			{% endif %}
+			{% endif %}
+			{% endif %}
+		</div>
+	</div>
+</div>

@@ -1,0 +1,151 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<main class="page-main">
+	<div class="module">
+		<h1 class="module__header">{{ lang("title.basket.checkout") }}</h1>
+		<div class="module__content">
+			<div class="basket contents">
+				<form method="POST" action="/checkout/update">
+					<table class="table table--hover table--striped">
+						<thead>
+							<th>{{ lang("basket.package.name") }}</th>
+							<th>{{ lang("basket.package.price") }}</th>
+							<th>&nbsp;</th>
+						</thead>
+						<tbody>
+							{% for package in basket.packages %}
+							<tr>
+								<td style="width:30%;">
+									<strong><a href="/package/{{ package.id }}" class="popup--ajax flyout">
+										{{ package.name }}
+										<span class="flyout__content">Click for more details</span>
+									</a></strong>
+								</td>
+								<td style="width:40%;">Billed <b>{{ package.price|money }} {{ basket.currency }}</b> every <b>{{ package.expiryPeriod }}</b></td>
+								<td style="width:30%; text-align:right;">
+									<div class="button-group">
+										<a href="/checkout/packages/remove/{{ package.id }}" class="button button--small button--decline"><i class="fa fa-times"></i></a>
+									</div>
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</form>
+			</div>
+			<div class="margin">
+				<h3>{{ lang("basket.coupons.header") }}</h3>
+				<div class="group">
+					<div class="pull-left">
+						<div class="input-append">
+							<form method="post" action="/checkout/coupons/add">
+								<input class="input--inline" type="text" name="coupon" placeholder="{{ lang('basket.coupons.placeholder') }}" style="width:500px;">
+								<button class="button">{{ lang("button.redeem") }}</button>
+							</form>
+						</div>
+					</div>
+					<div class="pull-right">
+						{% if basket.coupons|length > 0 %}
+						<table class="table table--striped table--hover" style="width:350px;">
+							<tbody>
+								{% for coupon in basket.coupons %}
+								<tr>
+									<td style="width:40%;">{{ coupon.code }}</td>
+									<td style="width:50%;">{{ coupon.description }}</td>
+									<td style="width:10%;"><a href="/checkout/coupons/remove/{{ coupon.code }}"><i class="icon-remove"></i></a></td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+			<form method="post" action="/checkout/pay" onSubmit="return submitCheckoutForm($(this));">
+				<input type="hidden" name="gateway" value="" id="checkout-gateway">
+				<input type="hidden" name="type" value="subscription" />
+				{% if checkout.requestAddress %}
+				<h3>Your details</h3>
+				<div class="grid form__group">
+					<div class="grid__item one-half">
+						<label>Full Name:</label>
+						<input type="text" name="address_name" class="input-large">
+					</div>
+					<div class="grid__item one-half">
+						<label>Email address:</label>
+						<input type="text" name="email" class="input-large">
+					</div>
+				</div>
+				<div class="grid form__group">
+					<div class="grid__item one-third">
+						<label>Address Line 1:</label>
+						<input type="text" name="address_line_1" class="input-large">
+					</div>
+					<div class="grid__item one-third">
+						<label>Address Line 2:</label>
+						<input type="text" name="address_line_2" class="input-large">
+					</div>
+					<div class="grid__item one-third">
+						<label>City:</label>
+						<input type="text" name="address_city" class="input-large">
+					</div>
+				</div>
+				<div class="grid form__group">
+					<div class="grid__item one-third">
+						<label>Zip Code:</label>
+						<input type="text" name="address_zip" class="input-large">
+					</div>
+					<div class="grid__item one-third">
+						<label>State/Region:</label>
+						<input type="text" name="address_state" id="stateselect" class="input-large">
+					</div>
+					<div class="grid__item one-third">
+						<label>Country:</label>
+						<div class="form__select-wrap">
+							<select name="address_country" class="input-xlarge">
+								<option value="">Select a country</option>
+								{% for country in checkout.countries %}
+								<option value="{{ country.id }}">{{ country.name }}</option>
+								{% endfor %}
+							</select>
+						</div>
+					</div>
+				</div>
+				{% endif %}
+				<div id="tax"></div>
+				<h3>{{ lang("basket.purchase.header") }}</h3>
+				<div class="form__group">
+					<input id="agreement" type="checkbox" value="true" name="agreement">
+					<label for="agreement" class="form__choice">{{ lang("basket.purchase.terms", '<a class="popup--ajax" href="/terms/">', '</a>')|raw }}</label>
+				</div>
+				<div class="form__group">
+					{% if basket.price > 0 %}
+					{% if checkout.gateways|length > 0 %}
+					{% for gateway in checkout.gateways %}
+					<div class="gateway flyout">
+						<input type="submit" name="{{ gateway.id }}" value="1" style="background:url('{{ gateway.image }}');" class="gateway-submit">
+						<div class="flyout__content">
+							Click to checkout with {{ gateway.name }}. ({{ gateway.description }})
+						</div>
+						{% if gateway.offset != 0 %}
+						<div class="offset">({% if gateway.offset > 0 %}+{% endif %}{{ gateway.offset|money }} {{ basket.currency }})</div>
+						{% endif %}
+					</div>
+					{% endfor %}
+					{% else %}
+					<p class="empty">You need to add a payment gateway before players can donate.</p>
+					{% endif %}
+					{% elseif store.allowFreeBaskets %}
+					<div class="gateway flyout">
+						<input type="submit" name="submit" style="background:url('/assets/img/gateways/free.png');" class="gateway-submit">
+						<div class="flyout__content">
+							Click to checkout for free.
+						</div>
+					</div>
+					{% endif %}
+				</div>
+			</form>
+		</div>
+	</main>
+	{% endblock %}
