@@ -7,16 +7,16 @@
 				<div class="skin">
 					<span class="mc-skin" data-minecraft-username="{{ module.ign }}"></span>
 				</div>
-			</div>  
+			</div>
 			<div class="media__content">
 				<div class="ign h3">{{ module.ign }}</div>
 				<div class="extra">
 					{% if module.displayAmount %}
 					Donated {{ module.total|money }} {{ store.currency }}
 					{% else %}
-					Donated the most 
+					Donated the most
 					{% endif %}
-					
+
 					{% if module.period == "hourly" %}
 					this hour.
 					{% elseif module.period == "daily" %}
