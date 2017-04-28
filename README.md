@@ -1,4 +1,4 @@
-# Neobyte-Buycraft
+# Digital-Hazards-Buycraft
 I love making sites stand out and i dont think i could of made this web store stand out anymore!
 
 #Once again guys, Its private!
