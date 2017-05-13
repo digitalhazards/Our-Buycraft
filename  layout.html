@@ -1,202 +1,54 @@
-<!DOCTYPE html>
-<!-- 		  Fonix Design!-->
-<!--   https://fonix.online -->
-<!-- Neobyte Network Ownership! -->
-<html lang="en">
-<head>
-	<title>Neobyte Donation Store</title>
-	<meta charset="utf-8">
-    <meta name="viewport" content="width=520, target-densitydpi=high-dpi" />
-    <meta http-equiv="Content-Type" content="application/vnd.wap.xhtml+xml; charset=utf-8" />
-    <meta name="HandheldFriendly" content="true" />
-    <meta name="apple-mobile-web-app-capable" content="yes" /> 
-	<link href="https://secure.cloud.neobyte-network.net/external-css/style.css" rel="stylesheet">
-	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-	<link href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:700" rel="stylesheet">
-	<link href="https://neobyte-network.net/xmas/snow.css" rel="stylesheet" type="text/css">
-	<link rel="shortcut icon" href="https://neobyte-network.net/images/ico/favicons.ico">
-	{% if store.theme %}
-	<link href="/theme/style?cache={{ store.theme }}" rel="stylesheet">
-	{% endif %}
-</head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Buycraft</title>
+    </head>
+    <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;margin: 0;padding: 0;background-color: #DEE0E2;height: 100%;width: 100%;">
+        <center>
+            <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;margin: 0;padding: 0;background-color: #DEE0E2;border-collapse: collapse;height: 100%;width: 100%;">
+                <tr>
+                    <td align="center" valign="top" id="bodyCell" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;margin: 0;padding: 20px;border-top: 4px solid #BBBBBB;height: 100%;width: 100%;">
+                        <table border="0" cellpadding="0" cellspacing="0" id="templateContainer" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;width: 600px;border: 1px solid #BBBBBB;border-collapse: collapse;">
+                            <tr>
+                                <td align="center" valign="top" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateHeader" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;background-color: #F4F4F4;border-top: 1px solid #FFFFFF;border-bottom: 1px solid #CCCCCC;border-collapse: collapse;">
+                                        <tr>
+                                            <td valign="top" class="headerContent" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;color: #505050;font-family: Helvetica;font-size: 20px;font-weight: bold;line-height: 100%;text-align: center;vertical-align: middle;height:100px;padding:5px;">
+                                                <h2>{{ accountData.name }}</h2>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" valign="top" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateBody" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;background-color: #F4F4F4;border-top: 1px solid #FFFFFF;border-bottom: 1px solid #CCCCCC;border-collapse: collapse;">
+                                        <tr>
+                                            <td valign="top" class="bodyContent" mc:edit="body_content00" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;color: #505050;font-family: Helvetica;font-size: 14px;line-height: 150%;padding-top: 20px;padding-right: 20px;padding-bottom: 20px;padding-left: 20px;text-align: left;">
 
-<body>
+{% block content %}{% endblock %}
 
-
-																	<canvas></canvas>
-   								<!--	<script src="https://neobyte-network.net/assets/js/NeoQue.js"></script>
-										<script src="https://secure.cloud.neobyte-network.net/external-css/js/FonixLines.js"></script> -->
-	<header class="page-head">
-		<div class="page-head__bar">
-			<div class="container">
-				<div id="menu-button" class="menu-button">
-					<span></span>
-				</div>
-				<nav id="main-nav" class="main-nav">
-					<ul class="main-nav__list">
-						<li class="{% if page.category == "index" %}current{% endif %}"><a href="/">{{ lang("category.home") }}</a></li>
-						{% for category in store.categories %} {% if category.subcategories|length > 0 %}
-						<li class="{% if category.active %}current{% endif %}">
-							<a href="#">{{ category.name }} <i class="fa fa-caret-down"></i></a>
-							<ul>
-								{% for subcategory in category.subcategories %}
-								<li><a href="/category/{{ subcategory.id }}">{{ subcategory.name }}</a></li>
-								{% endfor %}
-							</ul>
-						</li>
-						{% else %}
-						<li class="{% if category.active %}current{% endif %}"><a href="/category/{{ category.id }}">{{ category.name }}</a></li>
-						{% endif %} {% endfor %}
-					</ul>
-				</nav>
-				<!-- /main-nav -->
-				<div class="checkout">
-					<div class="dropdown">
-						<a href="#" class="button button--small button--secondary dropdown__toggle">
-							{{ basket.currency }} <i class="fa fa-caret-down"></i>
-						</a>
-						<ul class="dropdown__menu dropdown--list h6">
-							{% for currency in store.currencies %} {% if currency.code in [store.currency, "AUD", "BRL", "CAD", "DKK", "EUR", "NOK", "NZD", "GBP", "SEK", "USD", "PLN"] %}
-							<li {% if basket.currency == currency.code %}class="current" {% endif %}>
-								<a href="?currency={{ currency.code }}">{{ currency.code }}</a>
-							</li>
-							{% endif %} {% endfor %}
-						</ul>
-					</div>
-					{% if basket.packages|length > 0 %}
-					<div class="dropdown">
-						<a href="#" class="button button--small dropdown__toggle">
-							<i class="fa fa-shopping-cart"></i> {{ lang("basket.count", basket.packages|length, basket.price|money, basket.currency) }} <i class="fa fa-caret-down"></i></a>
-							<div class="dropdown__menu dropdown--right cart">
-								<ul class="list">
-									{% for package in basket.packages %}
-									<li>
-										<div class="grid grid--middle">
-											<div class="grid__item one-half text-left">
-												<strong>{{ package.name[:25] }}</strong>
-											</div>
-											<div class="grid__item one-half text-right">
-												<span class="price price--cart">{{ package.price|money }} {{ basket.currency }}</span>
-												<a href="/checkout/packages/remove/{{ package.id }}" class="button button--small button--decline"><i class="fa fa-times"></i></a>
-											</div>
-										</div>
-									</li>
-									{% endfor %}
-								</ul>
-								<div class="grid grid--middle grid--full">
-									<div class="grid__item one-half text-left">
-										{{ lang("basket.total") }}: {{ basket.price|money }} {{ basket.currency }}
-									</div>
-									<div class="grid__item one-half text-right">
-										<a href="/checkout/basket" class="button button--small button--accept">
-											<i class="fa fa-shopping-cart"></i> {{ lang("button.checkout") }} </a>
-										</div>
-									</div>
-								</div>
-							</div>
-							{% else %} <a href="#" class="button button--small button--disabled">
-							<i class="fa fa-shopping-cart"></i> {{ lang("basket.count", 0, 0.00, basket.currency) }} </a>
-							{% endif %} {% if basket.username %} <a href="/checkout/logout" class="logout" title="{{ lang("button.logout") }}">
-							<i class="fa fa-power-off"></i>
-						</a>
-						{% endif %}
-					</div>
-				</div>
-			</div>
-						<img class="logo" alt="{{ site.name }}" src="https://neobyte-network.net/images/SSL-Logo.png?822565">
-
-		</header>
-
-		<div class="container">
-			<div id="notifications">
-				<div class="flag note">
-					<div class="flag__image note__icon">
-						<i class="fa fa-info"></i>
-					</div>
-					<div class="flag__body note__text">
-					</div>
-					<a href="#" class="note__close">
-						<i class="fa fa-times"></i>
-					</a>
-				</div>
-			</div>
-
-			{% block content %} {% endblock %}
-
-			{% if store.plan == "1" %}
-			<p align="center">
-				<script>
-					google_ad_client = "ca-pub-9830135219921132";
-					google_ad_slot = "7404819681";
-					google_ad_width = 728;
-					google_ad_height = 90;
-				</script>
-				<script src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
-			</p>
-			{% endif %}
-		</div>
-
-		<footer class="page-footer group h6">
-			<div class="container">
-				<div class="grid grid--middle">
-					<div class="grid__item desk--one-third">
-						<div class="dropdown button-group__small">
-							<a href="#" class="button button--small dropdown__toggle no-margin"><i class="fa fa-globe"></i> Language <i class="fa fa-caret-up"></i></a>
-							<ul class="dropdown__menu dropdown--top dropdown--list h6">
-								{% for language in store.languages %}
-								<li><a href="?lang={{ language.code }}">{{ language.name }}</a></li>
-								{% endfor %}
-							</ul>
-						</div>
-					</div>
-					<div class="grid__item desk--one-third">
-						Webstore Design:  <a href="https://fonix.online">_Fonix</a>
-					</div>
-					<div class="grid__item desk--one-third">
-						{% if store.branding or store.plan != "3" %}
-						<!-- *** Do not hide/obscure the following "Powered by" message (Unless you have the Ultimate Plan). Your account will be deleted! -->
-						Linked to <a href="https://neobyte-network.net" target="_blank">Neobyte Network</a>
-						<p><a href="http://www.dmca.com/Protection/Status.aspx?ID=36516eb9-2e42-46d1-9b80-d329333259e6" title="DMCA.com Protection Status" class="dmca-badge"> <img src="https://neobyte-network.net/assets/mrep/dmca_protected_sml_120m.png" alt="DMCA.com Protection Status"></a> <script src="//images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script></p>
-						{% endif %}
-					</div>
-				</div>
-			</div>
-		</footer>
-
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script src="http://craftilldawn.com/buycraft/magnific-popup.min.js"></script>
-		<script src="http://craftilldawn.com/buycraft/functions.min.js"></script>
-		<script src="/assets/js/skin.js"></script>
-
-		{% if page.category == "checkout" %}
-		<script src="https://wallet.google.com/inapp/lib/buy.js"></script>
-		<script src="https://checkout.stripe.com/v2/checkout.js"></script>
-		{% endif %}
-
-		<script>
-			$(document).ready(function() {
-				$('.popup--ajax').magnificPopup({type:'ajax'});
-			});
-		</script>
-
-		{% if store.googleAnalytics %}
-		<script>
-			var _gaq = _gaq || [];
-			_gaq.push(['_setAccount', "{{ store.googleAnalytics }}"]);
-			_gaq.push(['_trackPageview']);
-			(function() {
-				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-			})();
-		</script>
-		{% endif %}
-
-		{% if page.message.display %}
-		<script>
-			showNotification("{{ page.message.type }}", "{{ page.message.text }}");
-		</script>
-		{% endif %}
-
-	</body>
-	</html>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" valign="top" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateFooter" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;background-color: #F4F4F4;border-top: 1px solid #FFFFFF;border-collapse: collapse;">
+                                        <tr>
+                                            <td valign="top" class="footerContent" mc:edit="footer_content00" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;color: #808080;font-family: Helvetica;font-size: 10px;line-height: 150%;padding-top: 20px;padding-right: 20px;padding-bottom: 20px;padding-left: 20px;text-align: left;">
+                                                Copyright &copy; 2011-{{ "now"|date("Y") }} Buycraft. All rights reserved. We are not affiliated with Mojang.com or Minecraft.net.
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </center>
+    </body>
+</html>
