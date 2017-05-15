@@ -24,15 +24,15 @@
 							<tbody>
 								{% for package in category.packages %}
 								<tr>
-									<td style="width:45%;"><strong>{{ package.name }}</strong></td>
-									<td style="width:30%; text-align:center;">
-										{% if package.customPrice == false and package.price > 0 %}
-										{% if package.discount.applied %}
-										<span class="price-discount">{{ package.discount.original|money }}</span>
-										{% endif %}
-										{{ package.price|money }} {{ basket.currency }}
-										{% endif %}
-									</td>
+									<td style="width:45%;">{{ package.name }}</td>
+						                  		<td style="width:35%; text-align:center;">
+						                  			{% if package.customPrice == false and package.price > 0 %}
+							                  			{% if package.discount.applied %}
+							                  				<span class="price-discount">{{ package.discount.original|money }}</span>
+							                  			{% endif %}
+														{{ package.price|money }} {{ basket.currency }}
+													{% endif %}
+						                  		</td>
 									<td style="width:25%; text-align:right;">
 
 										{% if package.basket %}
@@ -56,18 +56,17 @@
 											<img class="text-center" src="{{ package.image.url }}" style="width:190px; height:165px;"><span class="flyout__content">Click for more details.</span>
 										</a>
 									</div>
-
 									<div class="grid grid--full">
 										<div class="grid__item one-half">
 											<span class="package__name">{{ package.name[:20] }}</span>
 
 
-											{% if package.customPrice == false and package.price > 0 %}
-											{% if module.package.discount.applied %}
-											<span class="price price--discount">{{ package.discount.original|money }}</span>
-											{% endif %}
-											<span class="price">{{ package.price|money }} {{ store.currency }}</span>
-											{% endif %}
+										{% if package.customPrice == false and package.price > 0.00 %}
+													{% if package.discount.applied %}
+					                  					<span class="price-discount">{{ package.discount.original|money }}</span>
+					                  				{% endif %}
+													{{ package.price|money }} {{ basket.currency }}
+												{% endif %}
 										</div>
 										<div class="grid__item one-half text-right">
 
