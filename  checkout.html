@@ -110,11 +110,7 @@
 						<label>Zip Code:</label>
 						<input type="text" name="address_zip" class="input-large">
 					</div>
-					<div class="grid__item  desk--one-third">
-						<label>State/Region:</label>
-						<input type="text" name="address_state" id="stateselect" class="input-large">
-					</div>
-					<div class="grid__item  desk--one-third">
+										<div class="grid__item  desk--one-third">
 						<label>Country:</label>
 						<div class="form__select-wrap">
 							<select name="address_country" class="input-xlarge">
@@ -125,7 +121,13 @@
 							</select>
 						</div>
 					</div>
+
+					<div class="grid__item  desk--one-third">
+						<label>State/Region:</label>
+						<input type="text" name="address_state" id="stateselect" class="input-large">
+					</div>
 				</div>
+				<div id="notification-bar"></div>
 				{% endif %}
 				<div id="tax"></div>
 				<h3>{{ lang("basket.purchase.header") }}</h3>
