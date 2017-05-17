@@ -4,5 +4,5 @@ We got bored of the basic Buycraft Themes so we thought we would re-invent the l
 # Open source as it can be
 Although free for it all our web content is still protected by our DMCA agreement so do NOT directly copy our code! Use your brain and change it up a little!
 
-# Where's the CSS at?
-Our CSS is hosted on one of our global file servers which if you are smart enough i'm sure you can retrieve if you want it that bad, i may consider adding it into the repo later on!
+# Note about CSS
+Our CSS is based off of a bootstrap and adjusted around how Buycraft creates its elements, there are multiple different web-kits used and only a few colors this causes the site to have an awesome bold layout! With boxes that stand out with their bright borders
