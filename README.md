@@ -1,8 +1,8 @@
-# Digital-Hazards-Buycraft
-I love making sites stand out and i dont think i could of made this web store stand out anymore!
+# Digital-Hazards-Buycraft [![forthebadge](http://forthebadge.com/images/badges/made-with-crayons.svg)](http://forthebadge.com)
+We got bored of the basic Buycraft Themes so we thought we would re-invent the layout of it all!
 
-#Once again guys, Its private!
-Educational purposes only, unless you want to be dealing with DMCA or any other network staff member, lets just say you dont want to get caught! 
+# Open source as it can be
+Although free for it all our web content is still protected by our DMCA agreement so do NOT directly copy our code! Use your brain and change it up a little!
 
-#Where's the CSS at?
-Our CSS is hosted on one of our global file servers which if you are smart enough im sure you can retrive if you want it that bad, i may consider adding it into the repo later on!
+# Where's the CSS at?
+Our CSS is hosted on one of our global file servers which if you are smart enough i'm sure you can retrieve if you want it that bad, i may consider adding it into the repo later on!
